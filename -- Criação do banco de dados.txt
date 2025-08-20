@@ -1,0 +1,36 @@
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS escola;
+USE escola;
+
+-- Tabela SALA
+CREATE TABLE sala (
+    idsala INT AUTO_INCREMENT PRIMARY KEY,
+    nomesala VARCHAR(45) NOT NULL,
+    capacidadesala INT NOT NULL
+);
+
+-- Tabela TURMA
+CREATE TABLE turma (
+    idturma INT AUTO_INCREMENT PRIMARY KEY,
+    nometurma VARCHAR(45) NOT NULL,
+    periodo VARCHAR(45) NOT NULL,
+    sala_idsala INT,
+    FOREIGN KEY (sala_idsala) REFERENCES sala(idsala)
+);
+
+-- Tabela PROFESSOR
+CREATE TABLE professor (
+    idprofessor INT AUTO_INCREMENT PRIMARY KEY,
+    nomeprof VARCHAR(45) NOT NULL,
+    formacaoprof VARCHAR(45) NOT NULL,
+    turma_idturma INT,
+    FOREIGN KEY (turma_idturma) REFERENCES turma(idturma)
+);
+
+-- Tabela AULAS
+CREATE TABLE aulas (
+    idaulas INT AUTO_INCREMENT PRIMARY KEY,
+    nomeaula VARCHAR(45) NOT NULL,
+    professor_idprofessor INT,
+    FOREIGN KEY (professor_idprofessor) REFERENCES professor(idprofessor)
+);
